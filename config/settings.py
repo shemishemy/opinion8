@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_pandas',  # 設定
+    'openpyxl',
     'app.apps.AppConfig',
 ]
 

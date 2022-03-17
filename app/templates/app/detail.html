@@ -1,0 +1,40 @@
+<!-- app/templates/app/detail.html -->
+
+<!doctype html>
+<html>
+        <head>
+                <title>テストアプリ</title>
+        </head>
+        <body>
+
+            <h2>CSVファイル</h2>
+            <br>
+
+            <a href="{% url 'app:index' %}">戻る</a>
+            <br>
+
+            <!-- 各インスタンス属性の要素を取得 -->
+            <p>アップロード日：{{ file_value.created_at }}</p>
+            <p>ダウンロード：<a href="{{ file_value.upload_dir.url }}">{{file_value.file_name }}</a></p>
+            <br>
+
+            <!-- 読み込んだCSVファイルをテーブル形式で表示 -->
+            <table border="1">
+                <tr>
+                    <td>index</td>
+                    {% for columns, item in df.iteritems %}
+                        <th>{{ columns }}</th>
+                    {% endfor %}
+                </tr>
+                {% for index, rows in df.iterrows %}
+                    <tr>
+                        <th>{{ index }}</th>
+                        {% for row in rows %}
+                            <td>{{ row }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+
+        </body>
+</html>

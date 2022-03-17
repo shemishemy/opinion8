@@ -1,0 +1,26 @@
+<!-- app/templates/app/index.html -->
+
+<!doctype html>
+<html>
+        <head>
+                <title>テストアプリ</title>
+        </head>
+        <body>
+
+            <h2>CSVファイルリスト</h2>
+            <br>
+
+            {% if file_obj %}
+                {% for file in file_obj %}
+                    <p>
+                        {{ file.created_at }}
+                         {{ file.title }}
+                        <a href="{% url 'app:detail' pk=file.id %}">詳細</a>
+                    </p>
+                {% endfor %}
+            {% else %}
+                <h2>現在ファイルはありません</h2>
+            {% endif %}
+
+        </body>
+</html>

@@ -1,0 +1,40 @@
+<html>
+<body>
+    <form class="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>施設名: <input type="char" name="char" value="" required></p>
+        <p>CSV: <input type="file" name="csv" value="" required></p>
+        <p><input type="submit" name="btn_upload" value="UPLOAD"></p>
+    </form>
+    <table border="1">
+        <tr>
+            <td>index</td>
+            {% for columns, item in df.iteritems %}
+                <th>{{ columns }}</th>
+            {% endfor %}
+        </tr>
+        {% for index, rows in df.iterrows %}
+            <tr>
+                <th>{{ index }}</th>
+                {% for row in rows %}
+                    <td>{{ row }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        </table>
+        <h1>重要意見 + 類似ツイート</h1>
+        {% for key, r_url in r_urls.items %}
+            <h2>{{key}}</h2>
+            {% for list in r_url %}
+                {% for opinion, urls in list.items %}
+                    <h3>{{ opinion }}</h3>
+                    {% for url in urls %}
+                    <blockquote class="twitter-tweet">
+                        (ツイート埋め込み処理中)
+                        <a href="{{ url }}">tweet</a>
+                    </blockquote>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>{% endfor %}{% endfor %}
+            {% endfor %}
+        {% endfor %}
+</body>
+</html>
